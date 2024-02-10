@@ -1,6 +1,21 @@
 # WebServices
 third project of "AI and the Web"
 
+#### Code organization
+- hub.py – The hub code. No need to modify this. Run with
+    > python hub.py
+Runs on localhost, port 5555
+
+- channel.py – The starter code for a channel. Run with
+   > python channel.py
+After that, register your channel (in a separate terminal) with
+   > flask –app channel.py register
+   
+- client.py – The client application. Run with
+   > python client.py
+Open displayed URL in browser
+
+
 ### Project 3: Web Services
 
 Work on the following two tasks for the distributed message board environment presented in the seminar:
