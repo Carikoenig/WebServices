@@ -1,4 +1,4 @@
-## channel.py - a simple message channel
+## channel.py - a channel extracting the emotion of the user message
 ##
 
 from flask import Flask, request, render_template, jsonify
@@ -86,15 +86,17 @@ def send_message():
     # add message to messages
     messages = read_messages()
     messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
+    # add Bot answer message
     emotion_eval = te.get_emotion(message['content'])
     # emotion_eval = sorted(emotion_eval.items(), key=lambda x:x[1], reverse = True)
-    emotions_message = 'the message has the emotion(s): '
+    emotions_message = '@ ' + message['sender'] + ': '
     for emotion in emotion_eval:
-        print('emotion', emotion)
         if emotion_eval[emotion] > 0:
-            emotions_message += '\n\t' + emotion + str(emotion_eval[emotion])
-    if emotions_message == 'the message has the emotion(s): '
-        emotions_message == 'The message is neutral.'
+            emotions_message += ' Are you feeling '
+            emotions_message += '\n\t ' + emotion
+            emotions_message += '?'
+    if emotions_message == '@ ' + message['sender'] + ': ':
+        emotions_message += 'okay.'
     # print('Emotion analysis for ', message['content'], 'results :', emotions)
     messages.append({'content':emotions_message, 'sender': 'EmoBot', 'timestamp':datetime.datetime.now().isoformat()})
     save_messages(messages)

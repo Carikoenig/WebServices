@@ -3,3 +3,4 @@ flask-sqlalchemy
 requests
 text2emotion
 emoji==1.6.3
+keybert

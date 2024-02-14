@@ -1,9 +1,11 @@
-## channel.py - a simple message channel
+## channel.py - a channel returning the keywords from the user message
 ##
 
 from flask import Flask, request, render_template, jsonify
 import json
 import requests
+import datetime
+from keybert import KeyBERT
 
 # Class-based application configuration
 class ConfigClass(object):
@@ -20,7 +22,7 @@ app.app_context().push()  # create an app context before initializing db
 HUB_URL = 'http://localhost:5555'
 HUB_AUTHKEY = '1234567890'
 CHANNEL_AUTHKEY = '0987654321'
-CHANNEL_NAME = "The One and Only Channel"
+CHANNEL_NAME = "KeyChannel"
 CHANNEL_ENDPOINT = "http://localhost:5001" # don't forget to adjust in the bottom of the file
 CHANNEL_FILE = 'messages.json'
 
@@ -84,6 +86,14 @@ def send_message():
     # add message to messages
     messages = read_messages()
     messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
+    # add Bot answer message
+    key_message = " "
+    kw_model = KeyBERT()
+    keywords = kw_model.extract_keywords(message['content'], keyphrase_ngram_range=(1, 1))
+    print('keywords', keywords)
+    for key in keywords:
+        key_message += '\n #' + key[0]
+    messages.append({'content':key_message, 'sender': 'KeyBot', 'timestamp':datetime.datetime.now().isoformat()})
     save_messages(messages)
     return "OK", 200
 
