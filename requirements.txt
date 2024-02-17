@@ -4,3 +4,5 @@ requests
 text2emotion
 emoji==1.6.3
 keybert
+openai
+googletrans==4.0.0-rc1
