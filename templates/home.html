@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>List of channels</title>
 </head>
 <body>
 
 <h1>List of message channels</h1>
 
-<ul>
+<ul class="flex-content">
     {% for channel in channels %}
-        <li><a href="/show?channel={{ channel.endpoint | urlencode }}">{{ channel.name }}</a></li>
+        {% set channel_class = 'note-sheet-' + channel.name.lower() %}
+        <div class='note-book {{ channel_class }}'>
+            <p class='note-text'>
+                <a href="/show?channel={{ channel.endpoint | urlencode }}">{{ channel.name }}</a>
+                <div class="pen-wrapper">
+                    <div class="pen-icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+                
+            </p>
+        </div>
     {% endfor %}
 </ul>
 

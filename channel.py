@@ -15,14 +15,14 @@ class ConfigClass(object):
     SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
 
 # Create Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='css', static_url_path='/static')
 app.config.from_object(__name__ + '.ConfigClass')  # configuration
 app.app_context().push()  # create an app context before initializing db
 
 HUB_URL = 'http://localhost:5555'
 HUB_AUTHKEY = '1234567890'
 CHANNEL_AUTHKEY = '0987654321'
-CHANNEL_NAME = "KeyChannel"
+CHANNEL_NAME = "Key-Channel"
 CHANNEL_ENDPOINT = "http://localhost:5001" # don't forget to adjust in the bottom of the file
 CHANNEL_FILE = 'messages.json'
 
@@ -85,7 +85,7 @@ def send_message():
         return "No timestamp", 400
     # add message to messages
     messages = read_messages()
-    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
+    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp'], 'channel_origin': 'key-channel'})
     # add Bot answer message
     key_message = " "
     kw_model = KeyBERT()
@@ -93,7 +93,7 @@ def send_message():
     print('keywords', keywords)
     for key in keywords:
         key_message += '\n #' + key[0]
-    messages.append({'content':key_message, 'sender': 'KeyBot', 'timestamp':datetime.datetime.now().isoformat()})
+    messages.append({'content':key_message, 'sender': 'KeyBot', 'timestamp':datetime.datetime.now().isoformat(), 'channel_origin': 'key-channel'})
     save_messages(messages)
     return "OK", 200
 

@@ -15,14 +15,14 @@ class ConfigClass(object):
     SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
 
 # Create Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='css', static_url_path='/static')
 app.config.from_object(__name__ + '.ConfigClass')  # configuration
 app.app_context().push()  # create an app context before initializing db
 
 HUB_URL = 'http://localhost:5555'
 HUB_AUTHKEY = '1234567890'
 CHANNEL_AUTHKEY = '22334455'
-CHANNEL_NAME = "Emo - Channel"
+CHANNEL_NAME = "Emo-Channel"
 CHANNEL_ENDPOINT = "http://localhost:5002"
 CHANNEL_FILE = 'messages.json'
 
@@ -85,7 +85,7 @@ def send_message():
         return "No timestamp", 400
     # add message to messages
     messages = read_messages()
-    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp']})
+    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp'], 'channel_origin': 'emo-channel'})
     # add Bot answer message
     emotion_eval = te.get_emotion(message['content'])
     # emotion_eval = sorted(emotion_eval.items(), key=lambda x:x[1], reverse = True)
@@ -98,7 +98,7 @@ def send_message():
     if emotions_message == '@ ' + message['sender'] + ': ':
         emotions_message += 'okay.'
     # print('Emotion analysis for ', message['content'], 'results :', emotions)
-    messages.append({'content':emotions_message, 'sender': 'EmoBot', 'timestamp':datetime.datetime.now().isoformat()})
+    messages.append({'content':emotions_message, 'sender': 'EmoBot', 'timestamp':datetime.datetime.now().isoformat(),  'channel_origin': 'emo-channel'})
     save_messages(messages)
     return "OK", 200
 

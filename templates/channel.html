@@ -2,21 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Channel {{ channel.name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{{ channel.name }}</title>
 </head>
 <body>
 <p>The distributed messenger. <a href="{{ url_for('home_page') }}">List of channels.</a> </p>
-{% if channel %}
-    <h1>Channel {{ channel.name }}</h1>
+    {% if channel %}
+        <h1> {{ channel.name }}</h1>
+        <div class="flex-content">
+            {% for message in messages %}
+            {% set channel_class = 'note-sheet-' + message.channel_origin.lower() %}
+            <!-- <script>console.log('channel class :', channel_class);</script> -->
+            <div class='note-sheet {{ channel_class }}'>
+                <p class='note-text'>
+                    <h2>{{ message.sender }}</h2>
+                    <p>{{ message.content }}</p>
+                    <p style="font-size: 60%">{{ message.timestamp }}</p>
+                </p>
+            </div>
+            
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>Channel not found</h1>
+    {% endif %}
 
-        {% for message in messages %}
-            <h2>{{ message.sender }}</h2>
-            <p>{{ message.content }}</p>
-            <p style="font-size: 60%">{{ message.timestamp }}</p>
-        {% endfor %}
-{% else %}
-    <h1>Channel not found</h1>
-{% endif %}
+
 
 <form action="post" method="post">
     <input type="hidden" name="channel" value="{{ channel.endpoint | urlencode }}">

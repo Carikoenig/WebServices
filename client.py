@@ -3,7 +3,7 @@ import requests
 import urllib.parse
 import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='css', static_url_path='/static')
 
 HUB_AUTHKEY = '1234567890'
 HUB_URL = 'http://localhost:5555'
