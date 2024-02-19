@@ -2,11 +2,12 @@ from flask import Flask, request, render_template, url_for, redirect
 import requests
 import urllib.parse
 import datetime
+import traceback
 
 app = Flask(__name__, static_folder='css', static_url_path='/static')
 
-HUB_AUTHKEY = '1234567890'
-HUB_URL = 'http://localhost:5555'
+HUB_URL: 'https://temporary-server.de'
+SERVER_AUTHKEY = 'Crr-K3d-2N'
 
 CHANNELS = None
 LAST_CHANNEL_UPDATE = None
@@ -77,6 +78,9 @@ def post_message():
         return "Error posting message: "+str(response.text), 400
     return redirect(url_for('show_channel')+'?channel='+urllib.parse.quote(post_channel))
 
+@app.errorhandler(500)
+def internal_error(exception):
+   return "<pre>"+traceback.format_exc()+"</pre>"
 
 # Start development web server
 if __name__ == '__main__':

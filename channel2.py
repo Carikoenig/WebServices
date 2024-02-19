@@ -6,6 +6,7 @@ import json
 import requests
 import datetime
 import text2emotion as te
+import traceback
 
 # Class-based application configuration
 class ConfigClass(object):
@@ -19,8 +20,8 @@ app = Flask(__name__, static_folder='css', static_url_path='/static')
 app.config.from_object(__name__ + '.ConfigClass')  # configuration
 app.app_context().push()  # create an app context before initializing db
 
-HUB_URL = 'http://localhost:5555'
-HUB_AUTHKEY = '1234567890'
+HUB_URL: 'https://temporary-server.de's
+SERVER_AUTHKEY = 'Crr-K3d-2N'
 CHANNEL_AUTHKEY = '22334455'
 CHANNEL_NAME = "Emotion-Channel"
 CHANNEL_ENDPOINT = "http://localhost:5002"
@@ -119,6 +120,10 @@ def save_messages(messages):
     global CHANNEL_FILE
     with open(CHANNEL_FILE, 'w') as f:
         json.dump(messages, f)
+
+@app.errorhandler(500)
+def internal_error(exception):
+   return "<pre>"+traceback.format_exc()+"</pre>"
 
 # Start development web server
 if __name__ == '__main__':

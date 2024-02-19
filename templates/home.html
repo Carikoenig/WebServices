@@ -16,7 +16,7 @@
         {% set channel_class = 'note-sheet-' + channel.name.lower() %}
         <div class='note-book {{ channel_class }}'>
             <p class='note-text'>
-                <a href="/show?channel={{ channel.endpoint | urlencode }}">{{ channel.name }}</a>
+                <a href="{{ url_for('show_channel') }}?channel={{ channel.endpoint | urlencode }}">{{ channel.name }}</a>
                 <div class="pen-wrapper">
                     <div class="pen-icon">
                         <i class="fas fa-pen"></i>
