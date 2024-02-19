@@ -20,7 +20,7 @@ app = Flask(__name__, static_folder='css', static_url_path='/static')
 app.config.from_object(__name__ + '.ConfigClass')  # configuration
 app.app_context().push()  # create an app context before initializing db
 
-HUB_URL: 'https://temporary-server.de's
+HUB_URL: 'https://temporary-server.de'
 SERVER_AUTHKEY = 'Crr-K3d-2N'
 CHANNEL_AUTHKEY = '22334455'
 CHANNEL_NAME = "Emotion-Channel"
