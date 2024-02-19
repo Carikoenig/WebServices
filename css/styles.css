@@ -1,23 +1,81 @@
-body {
+  body {
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
   }
 
-.flex-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap; 
-  align-items: flex-start;
-}
+  .fixed-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0; /* Adjust the background color as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a subtle effect */
+    z-index: 1000; /* Ensure the header appears above other elements */
+  }
+
+  .header-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    margin-left: 20px;
+  }
+
+  .header-right{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+
+  .flex-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap; 
+    align-items: flex-start;
+  }
+
+  input[type='text'] {
+    min-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+  }
+
+  .larger-input {
+    width: 500px; /* Adjust the width as needed */
+    height: 40px;
+  }
+
+  .board{
+    margin-top: 180px;
+  }
   
+  .note-sheet-new {
+    min-width: 600px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-overflow: hidden;
+  }
+
   .note-sheet {
     max-width: 300px;
     padding: 20px;
     margin: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .note-book {
     max-width: 300px;
@@ -25,22 +83,23 @@ body {
     margin: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    text-overflow: hidden;
   }
   .note-book:hover {
     color: #6f7985;
     cursor: auto;
 }
   
-  .note-sheet-emo-channel {
+  .note-sheet-emotion-channel {
     background-color: #e1f5fe;
   }
   
-  .note-sheet-key-channel {
+  .note-sheet-keyword-channel {
     background-color: #fff9c4;
   }
 
   
-  .note-sheet-trans-channel {
+  .note-sheet-translation-channel {
     background-color: #c8e6c9; 
   }
 

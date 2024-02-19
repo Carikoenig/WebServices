@@ -24,7 +24,7 @@ app.app_context().push()  # create an app context before initializing db
 HUB_URL = 'http://localhost:5555'
 HUB_AUTHKEY = '1234567890'
 CHANNEL_AUTHKEY = '3344556'
-CHANNEL_NAME = "Trans-Channel"
+CHANNEL_NAME = "Translation-Channel"
 CHANNEL_ENDPOINT = "http://localhost:5003"
 CHANNEL_FILE = 'messages.json'
 
@@ -87,7 +87,7 @@ def send_message():
         return "No timestamp", 400
     # add message to messages
     messages = read_messages()
-    messages.append({'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp'],  'channel_origin': 'trans-channel'})
+    messages.insert(0, {'content':message['content'], 'sender':message['sender'], 'timestamp':message['timestamp'],  'channel_origin': 'translation-channel'})
     # add Bot answer message
     # LANGCODES = dict(map(reversed, LANGUAGES.items()))
     translator = Translator()
@@ -99,7 +99,7 @@ def send_message():
     print('lang_from', lang_from)
     translated_text = translator.translate(user_message, src='auto', dest = random_lang).text
     
-    messages.append({'content':'Here is a translation from ' + LANGUAGES[lang_from] + ' into ' + LANGUAGES[random_lang] + ' : ' + str(translated_text), 'sender': 'TransBot', 'timestamp':datetime.datetime.now().isoformat(),  'channel_origin': 'trans-channel'})
+    messages.insert(0, {'content':'Here is a translation from ' + LANGUAGES[lang_from] + ' into ' + LANGUAGES[random_lang] + ' : ' + str(translated_text), 'sender': 'TransBot', 'timestamp':datetime.datetime.now().isoformat(),  'channel_origin': 'translation-channel'})
     save_messages(messages) 
     return "OK", 200
 

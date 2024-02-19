@@ -3,14 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>{{ channel.name }}</title>
 </head>
 <body>
-<p>The distributed messenger. <a href="{{ url_for('home_page') }}">List of channels.</a> </p>
+    <header class="fixed-header">
+            <div class="header-left">
+                {% if channel %}
+                    <h1>
+                        <div class="pen-wrapper">
+                            <div class="pen-icon">
+                                <i class="fas fa-book"></i>{{ channel.name }}
+                            </div>
+                        </div>    
+                    </h1>
+                {% else %}
+                    <h1>Channel not found</h1>
+                {% endif %} 
+                <p>The distributed messenger. <a href="{{ url_for('home_page') }}">List of channels.</a> </p>
+            </div>
+        
+            <div class="header-right">
+                <div class="note-sheet-new">
+                    <form action="post" method="post">
+                        <input type="hidden" name="channel" value="{{ channel.endpoint | urlencode }}">
+                        Sender: <input type="text" name="sender" id="sender" placeholder="tell who you are..."> <input type="submit" value="Post"> <br>
+                        Message: <input type="text" class='larger-input' name="content" id="content" placeholder="enter your message..."> <br>
+                    </form>
+                </div>
+            </div>
+           
+    </header>
+    
     {% if channel %}
-        <h1> {{ channel.name }}</h1>
-        <div class="flex-content">
+    <div class="flex-content board">
             {% for message in messages %}
             {% set channel_class = 'note-sheet-' + message.channel_origin.lower() %}
             <!-- <script>console.log('channel class :', channel_class);</script> -->
@@ -30,12 +57,7 @@
 
 
 
-<form action="post" method="post">
-    <input type="hidden" name="channel" value="{{ channel.endpoint | urlencode }}">
-    Sender: <input type="text" name="sender" id="sender"> <br>
-    Message: <input type="text" name="content" id="content"> <br>
-    <input type="submit" value="Post">
-</form>
+
 
 </body>
 </html>
