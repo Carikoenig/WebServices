@@ -32,6 +32,10 @@
     align-items: flex-start;
   }
 
+  .headline{
+    margin-left: 20px;
+  }
+
 
   .flex-content {
     display: flex;
