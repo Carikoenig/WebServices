@@ -1,19 +1,19 @@
 # WebServices
 third project of "AI and the Web".
 How to start it:
-    clone the repo 
-    open cmd:
-    make a virtual environment and install the requiremnts with 'pip install -r requirements.txt'
-        'python hub.py'
-    open 2 new cmd for each channel to start and register the channels:
-        'python channel.py'
-        'flask –app channel.py register'
-        'python channel1.py'
-        'flask –app channel1.py register'
-        'python channel2.py'
-        'flask –app channel.py register'
-    open another cmd:
-        'python client.py'
+    -clone the repo (go back to codebase of commit of ''fix and finish up'' as the server deployment never ran in the end...)
+    -open cmd:
+    -make a virtual environment and install the requiremnts with 'pip install -r requirements.txt'
+        >'python hub.py'
+    -open 2 new cmd for each channel to start and register the channels:
+        >'python channel.py'
+        >'flask –app channel.py register'
+        >'python channel1.py'
+        >'flask –app channel1.py register'
+        >'python channel2.py'
+        >'flask –app channel.py register'
+    -open another cmd:
+        >'python client.py'
 
 #### Code organization
 - hub.py – The hub code. No need to modify this. Run with
