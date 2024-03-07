@@ -1,4 +1,6 @@
 # WebServices
+<img width="958" alt="screenshot-channel" src="https://github.com/Carikoenig/WebServices/assets/80691517/46312ceb-cb39-4bb3-a471-13621accbbf1">
+
 third project of "AI and the Web".
 How to start it:
 -clone the repo (go back to codebase of commit of ''fix and finish up'' as the server deployment never ran in the end...)
