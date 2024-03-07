@@ -1,5 +1,19 @@
 # WebServices
-third project of "AI and the Web"
+third project of "AI and the Web".
+How to start it:
+    clone the repo 
+    open cmd:
+    make a virtual environment and install the requiremnts with 'pip install -r requirements.txt'
+        'python hub.py'
+    open 2 new cmd for each channel to start and register the channels:
+        'python channel.py'
+        'flask –app channel.py register'
+        'python channel1.py'
+        'flask –app channel1.py register'
+        'python channel2.py'
+        'flask –app channel.py register'
+    open another cmd:
+        'python client.py'
 
 #### Code organization
 - hub.py – The hub code. No need to modify this. Run with
@@ -41,11 +55,7 @@ HINT: It's very easy to fulfill the minimum requirements. Contributions that ful
 
     The standard client is very simplistic. Make it fancier, somehow.
 
- 
 
-3. Deploy your channel and your client on the known servers
-
-    Hub endpoint: https://temporary-server.de
-    Authkey: SERVER_AUTHKEY = 'Crr-K3d-2N'
+3. Deploy your channel and your client on the known servers.
     Register your channel with the central hub.
     Play around with other groups' channels.
